@@ -1,15 +1,9 @@
 package com.zcj.mybatisplus.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zcj.mybatisplus.entity.SysPermission;
-import com.zcj.mybatisplus.entity.SysRole;
-import com.zcj.mybatisplus.entity.SysUser;
-import com.zcj.mybatisplus.entity.SysUserRole;
-import com.zcj.mybatisplus.mapper.RoleMapper;
-import com.zcj.mybatisplus.mapper.UserMapper;
-import com.zcj.mybatisplus.mapper.UserRoleMapper;
+import com.zcj.mybatisplus.entity.*;
+import com.zcj.mybatisplus.mapper.*;
 import com.zcj.mybatisplus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +19,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     private UserRoleMapper userRoleMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private RolePermissionMapper rolePermissionMapper;
+    @Autowired
+    private PermissionMapper permissionMapper;
 
     /**
      * 根据用户Id 查询用户的权限信息
@@ -36,7 +34,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         QueryWrapper<SysUserRole> userRoleWrapper = new QueryWrapper<>();
         userRoleWrapper.eq("userId", userId);
         List<SysUserRole> sysUserRoles = userRoleMapper.selectList(userRoleWrapper);
-        List<Integer> roleIds=null;
+        List<Integer> roleIds = null;
         if (sysUserRoles != null && sysUserRoles.size() > 0) {
             roleIds = new ArrayList<>(sysUserRoles.size());
             for (SysUserRole sysUserRole : sysUserRoles) {
@@ -50,17 +48,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         return sysRoles;
     }
 
+    /**
+     * 查询用户的权限
+     *
+     * @param userId
+     * @return
+     */
     public List<SysPermission> findPermission(Integer userId) {
         List<SysRole> sysRoles = this.findRoles(userId);
-        List<Integer> sysRoleIds=null;
+        List<Integer> sysRoleIds = null;
         if (sysRoles != null && sysRoles.size() > 0) {
-           sysRoleIds= new ArrayList<>(sysRoles.size());
+            sysRoleIds = new ArrayList<>(sysRoles.size());
             for (SysRole sysRole : sysRoles) {
                 sysRoleIds.add(sysRole.getId());
             }
         }
 
-        return null;
+        QueryWrapper<SysRolePermission> rpWrapper = new QueryWrapper<>();
+        rpWrapper.in("roleId", sysRoleIds);
+        List<SysRolePermission> rolePermissions = rolePermissionMapper.selectList(rpWrapper);
+        List<Integer> permissionIds = null;
+        if (rolePermissions != null && rolePermissions.size() > 0) {
+            permissionIds = new ArrayList<>(rolePermissions.size());
+            for (SysRolePermission rolePermission : rolePermissions) {
+                permissionIds.add(rolePermission.getPermissionId());
+            }
+        }
+
+        if (permissionIds.size() != 0) {
+            QueryWrapper<SysPermission> permissionWrapper = new QueryWrapper<>();
+            permissionWrapper.in("permissionId", permissionIds);
+            return permissionMapper.selectList(permissionWrapper);
+        }
+        return new ArrayList<>();
     }
 
     /**
