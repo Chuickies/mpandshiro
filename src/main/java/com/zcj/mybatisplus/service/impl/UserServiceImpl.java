@@ -1,5 +1,6 @@
 package com.zcj.mybatisplus.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zcj.mybatisplus.entity.*;
@@ -91,5 +92,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
      */
     public SysUser findUserById(Integer userId) {
         return userMapper.selectById(userId);
+    }
+
+    /**
+     * 查询出所有的用户
+     * @return
+     */
+    public List<SysUser> queryAllUser(){
+        return userMapper.selectList(null);
+    }
+
+    @Override
+    public SysUser findUserByUserName(String username) {
+        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",username);
+        SysUser sysUser = userMapper.selectOne(queryWrapper);
+        return sysUser;
     }
 }
