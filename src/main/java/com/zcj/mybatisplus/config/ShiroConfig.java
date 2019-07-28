@@ -43,7 +43,8 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    private Realm getUserRealm() {
+    @Bean
+    public Realm getUserRealm() {
         UserRealm userRealm = new UserRealm();
         return userRealm;
     }
