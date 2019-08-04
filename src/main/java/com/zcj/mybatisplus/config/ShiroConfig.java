@@ -24,9 +24,10 @@ public class ShiroConfig {
         //配置退出 具体的代码shiro已经实现
         filterChainDefinitionMap.put("/logout","anon" );
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
-        filterChainDefinitionMap.put("/user/**","anon" );
-        filterChainDefinitionMap.put("/test/**","anon" );
-        filterChainDefinitionMap.put("/page/**","anon" );
+        filterChainDefinitionMap.put("/css/**","anon" );
+        filterChainDefinitionMap.put("/js/**","anon" );
+        filterChainDefinitionMap.put("/images/**","anon" );
+        filterChainDefinitionMap.put("/page/**","authc" );
         // 如果不设置会自动找到WEB 工程目录下的"/login.html" 页面
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/page/failure.html");  //未授权时的跳转
