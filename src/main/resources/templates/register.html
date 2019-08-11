@@ -10,10 +10,27 @@
     <script src="../static/js/jquery-3.3.1.min.js"></script>
     <!--bootstrap 依赖jquery-->
     <script src="../static/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .first{
+            border: #2b542c 1px solid;
+            background-color: #2b542c;
+        }
+        form{
+            width: 500px;
+            height: 300px;
+            margin: 30px auto;
+
+        }
+    </style>
 </head>
 <body>
-<div>
+<div class="row first">
     <form action="/user/register" method="post">
+
         用户名：<input type="text" placeholder="请输入用户名"/><br/>
         密码：<input type="password" placeholder="请输入密码"/><br/>
         邮箱：<input type="email" placeholder="邮箱"/><br/>
