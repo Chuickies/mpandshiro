@@ -2,7 +2,6 @@ package com.zcj.mybatisplus.config;
 
 
 import com.zcj.mybatisplus.realm.UserRealm;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -26,7 +25,7 @@ public class ShiroConfig {
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionMap.put("/css/**","anon" );
         filterChainDefinitionMap.put("/js/**","anon" );
-        filterChainDefinitionMap.put("/images/**","anon" );
+        filterChainDefinitionMap.put("/images/**","authc" );
         filterChainDefinitionMap.put("/page/**","authc" );
         // 如果不设置会自动找到WEB 工程目录下的"/login.html" 页面
         shiroFilterFactoryBean.setLoginUrl("/login.html");
