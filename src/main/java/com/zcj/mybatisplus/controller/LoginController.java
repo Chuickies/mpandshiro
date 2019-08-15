@@ -15,12 +15,6 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/register/page")
-    public ModelAndView registerPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register");
-        return modelAndView;
-    }
     @RequestMapping("/page")
     public String page(){
         return "register";

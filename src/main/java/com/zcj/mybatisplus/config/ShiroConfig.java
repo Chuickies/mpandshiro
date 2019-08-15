@@ -15,6 +15,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -27,10 +28,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/**","anon" );
         filterChainDefinitionMap.put("/images/**","authc" );
         filterChainDefinitionMap.put("/page/**","authc" );
-        // 如果不设置会自动找到WEB 工程目录下的"/login.html" 页面
+        // 如果不设置会自动找到WEB 工程目录下的"/login.jsp" 页面
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/page/failure.html");  //未授权时的跳转
-        //跳转成功后的页面
+        //登录成功默认跳转的页面
         shiroFilterFactoryBean.setSuccessUrl("/page/main.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
