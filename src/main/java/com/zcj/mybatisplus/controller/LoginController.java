@@ -19,7 +19,6 @@ public class LoginController {
     public String page(){
         return "register";
     }
-
     @RequestMapping("/register")
     public ResultInfo register(@RequestBody( required = true) SysUser sysUser) {
         sysUser.setStatus(0);

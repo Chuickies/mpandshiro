@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!--针对IE：使用浏览器最新版本的内核解析当前页面-->
@@ -7,9 +7,11 @@
     <!--视口设置：针对移动设备的设置-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册界面</title>
-    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script th:src="${'../static/js/jquery-3.3.1.min.js'}"></script>
+
     <!--bootstrap 依赖jquery-->
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script th:src="${'../static/js/bootstrap.min.js'}"></script>
+
     <style type="text/css">
         * {
             margin: 0;
@@ -52,11 +54,17 @@
 </div>
 
 <script type="application/javascript">
+    var sysUser = {
+        "username": $("#username").val(),
+        "password": $("#password").val(),
+        "email": $("#email").val(),
+        "phone": $("#phone").val()
+    };
     $("#register").click(function () {
-        var params = $("#username").val() + $("#password").val() + $("#email").val() + $("#phone").val() + $("code").val();
+        console.log(1);
         $.ajax({
             url: "sys/user/register",
-            data: params,
+            data: sysUser,
             type: "post",
             success: function (response) {
                 alert(response)

@@ -18,6 +18,7 @@ spring:
     prefix: classpath:/templates/
     cache: false
     suffix: .html
+    mode: HTML
   # 设置静态文件路径，js,css等
   mvc:
     static-path-pattern: /**
