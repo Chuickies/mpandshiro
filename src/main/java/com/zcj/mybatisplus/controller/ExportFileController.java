@@ -1,9 +1,12 @@
 package com.zcj.mybatisplus.controller;
 
+import com.github.liaochong.myexcel.core.DefaultExcelBuilder;
+import com.github.liaochong.myexcel.utils.AttachmentExportUtil;
 import com.zcj.mybatisplus.entity.SysUser;
 import com.zcj.mybatisplus.service.UserService;
-import com.zcj.mybatisplus.utils.ExportExcel;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +21,7 @@ public class ExportFileController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/exportXls")
+    /*@RequestMapping("/exportXls")
     public void exportFile(HttpServletResponse response) {
         try {
             String title = "内场客户报备表";
@@ -35,17 +38,17 @@ public class ExportFileController {
                     obj = new Object[rowsName.length];
                     obj[0] = user.getUserId();
                     obj[1] = user.getUsername();
-                    if(user.getEmail()!=null){
+                    if (user.getEmail() != null) {
                         obj[2] = user.getEmail();
-                    }else {
-                        obj[2]="---";
+                    } else {
+                        obj[2] = "---";
                     }
 
                     obj[3] = user.getPassword();
-                    if(user.getPhoneNum()!=null){
+                    if (user.getPhoneNum() != null) {
                         obj[4] = user.getEmail();
-                    }else {
-                        obj[4]="---";
+                    } else {
+                        obj[4] = "---";
                     }
                     obj[5] = user.getStatus();
                     dataList.add(obj);
@@ -66,6 +69,13 @@ public class ExportFileController {
         }
 
 
+    }*/
+
+    @GetMapping("/take/excel")
+    public void takeExcel(HttpServletResponse response) {
+        List<SysUser> sysUsers = userService.list();
+        Workbook build = DefaultExcelBuilder.of(SysUser.class).build(sysUsers);
+        AttachmentExportUtil.export(build, "用户表", response);
     }
 
 }
