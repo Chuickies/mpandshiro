@@ -34,7 +34,7 @@ public class ExportFileController {
                     SysUser user = sysUsers.get(i);
                     obj = new Object[rowsName.length];
                     obj[0] = user.getUserId();
-                    obj[1] = user.getUsername();
+                    obj[1] = user.getUserName();
                     if(user.getEmail()!=null){
                         obj[2] = user.getEmail();
                     }else {
