@@ -7,5 +7,13 @@ import com.zcj.mybatisplus.entity.SysUser;
 import java.util.List;
 
 public interface UserService extends IService<SysUser> {
+
     SysUser findUserByUserName(String username);
+
+    /**
+     * 用户注册
+     * @param sysUser
+     * @return
+     */
+    Boolean addUser(SysUser sysUser);
 }

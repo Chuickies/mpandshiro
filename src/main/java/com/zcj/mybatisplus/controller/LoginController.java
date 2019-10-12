@@ -16,16 +16,20 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/page")
-    public String page(){
+    public String page() {
         return "register";
     }
-    @RequestMapping("/register")
-    public ResultInfo register(@RequestBody( required = true) SysUser sysUser) {
+
+    @PostMapping("/register")
+    @ResponseBody
+    public ResultInfo register(@RequestBody SysUser sysUser) {
         sysUser.setStatus(0);
-        boolean save = userService.save(sysUser);
-        if (save)
-            new ResultInfo(true, "注册成功");
-        return new ResultInfo(false,"失败");
+        Boolean success = userService.addUser(sysUser);
+        if (success) {
+            return new ResultInfo(true,"注册成功");
+        } else {
+            return new ResultInfo(true,"注册失败");
+        }
     }
 
     @RequestMapping("/login")

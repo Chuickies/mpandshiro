@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "userService")
-public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
+public class
+UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -25,6 +26,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     @Autowired
     private PermissionMapper permissionMapper;
 
+
+    @Override
+    public Boolean addUser(SysUser sysUser) {
+        return  this.save(sysUser);
+    }
     /**
      * 根据用户Id 查询用户的权限信息
      *
@@ -109,4 +115,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
         SysUser sysUser = userMapper.selectOne(queryWrapper);
         return sysUser;
     }
+
+
 }

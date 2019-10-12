@@ -21,7 +21,7 @@ spring:
     mode: HTML
   # 设置静态文件路径，js,css等
   mvc:
-    static-path-pattern: /**
+    static-path-pattern: static/**
   resource:
     static-locations: classpath:/static/,classpath:/public/
 

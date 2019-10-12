@@ -1,7 +1,5 @@
 package com.zcj.mybatisplus.controller;
 
-import com.github.liaochong.myexcel.core.DefaultExcelBuilder;
-import com.github.liaochong.myexcel.utils.AttachmentExportUtil;
 import com.zcj.mybatisplus.entity.SysUser;
 import com.zcj.mybatisplus.service.UserService;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -37,18 +35,18 @@ public class ExportFileController {
                     SysUser user = sysUsers.get(i);
                     obj = new Object[rowsName.length];
                     obj[0] = user.getUserId();
-                    obj[1] = user.getUsername();
-                    if (user.getEmail() != null) {
+                    obj[1] = user.getUserName();
+                    if(user.getEmail()!=null){
                         obj[2] = user.getEmail();
-                    } else {
-                        obj[2] = "---";
+                    }else {
+                        obj[2]="---";
                     }
 
                     obj[3] = user.getPassword();
-                    if (user.getPhoneNum() != null) {
+                    if(user.getPhoneNum()!=null){
                         obj[4] = user.getEmail();
-                    } else {
-                        obj[4] = "---";
+                    }else {
+                        obj[4]="---";
                     }
                     obj[5] = user.getStatus();
                     dataList.add(obj);
