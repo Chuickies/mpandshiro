@@ -5,45 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
+@Configuration
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class ReflectDemo {
 
 
-
-    /**
-     * 获取某个对象的所有属性和属性值
-     * @param obj
-     */
-    public static List<HashMap<String,Object>> getClassAttributeValue(Object obj){
-        List<HashMap<String,Object>> fieldList= new ArrayList<>();
-        Class<?> cls = obj.getClass();
-        try {
-            //获取类的所有属性值
-            Field[] fields = cls.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                HashMap<String,Object> fieldMap = new HashMap<>();
-                Field field = fields[i];
-                //暴力获取
-                field.setAccessible(true);
-                //获取属性名和属性值
-                String fieldName = field.getName();
-                Object value = field.get(obj);
-                fieldMap.put(fieldName,value);
-                fieldList.add(fieldMap);
-            }
-
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return fieldList;
-    }
     @Test
     public void  getFieldTest() throws IllegalAccessException {
         SysUser sysUser1 = new SysUser();
@@ -74,6 +48,15 @@ public class ReflectDemo {
         }
         //log.info("sysUser fields are ={}",);
     }
+
+
+    public static String getDiff(List<Map<Object,Object>> mapList){
+        String remarkLog="";
+        //获取配置文件信息
+        //转换属性名
+        //记录信息
+        return  remarkLog;
+    }
     /**
      * 对比同一对象的属性值是否相同如果不相同则记录
      */
@@ -93,7 +76,7 @@ public class ReflectDemo {
                     Map<Object,Object> map =  new HashMap<>();
 
                     String oldFieldValue = o1Fields[i].getName()+":"+o1Fields[i].get(o1);
-                    String newFieldValue=o2Fields[j].getName()+":"+o2Fields[j].get(o2);
+                    Object newFieldValue=  o2Fields[j].get(o2);
                     map.put(oldFieldValue,newFieldValue);
                     mapList.add(map);
                 }
@@ -102,7 +85,12 @@ public class ReflectDemo {
         return mapList;
     }
 
-    //对比两个数据是否内容相同
+    /**
+     * 对比两个数据是否内容相同
+     * @param object1
+     * @param object2
+     * @return
+     */
     public static boolean compareTwo(Object object1, Object object2) {
 
         if (object1 == null && object2 == null) {
@@ -122,5 +110,34 @@ public class ReflectDemo {
             return true;
         }
         return false;
+    }
+
+
+    /**
+     * 获取某个对象的所有属性和属性值
+     * @param obj
+     */
+    public static List<HashMap<String,Object>> getClassAttributeValue(Object obj){
+        List<HashMap<String,Object>> fieldList= new ArrayList<>();
+        Class<?> cls = obj.getClass();
+        try {
+            //获取类的所有属性值
+            Field[] fields = cls.getDeclaredFields();
+            for (int i = 0; i < fields.length; i++) {
+                HashMap<String,Object> fieldMap = new HashMap<>();
+                Field field = fields[i];
+                //暴力获取
+                field.setAccessible(true);
+                //获取属性名和属性值
+                String fieldName = field.getName();
+                Object value = field.get(obj);
+                fieldMap.put(fieldName,value);
+                fieldList.add(fieldMap);
+            }
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return fieldList;
     }
 }
