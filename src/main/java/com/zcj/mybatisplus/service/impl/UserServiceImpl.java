@@ -7,6 +7,7 @@ import com.zcj.mybatisplus.entity.*;
 import com.zcj.mybatisplus.mapper.*;
 import com.zcj.mybatisplus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService 
     private RolePermissionMapper rolePermissionMapper;
     @Autowired
     private PermissionMapper permissionMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     @Override
@@ -114,6 +117,11 @@ UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements UserService 
         queryWrapper.eq("username",username);
         SysUser sysUser = userMapper.selectOne(queryWrapper);
         return sysUser;
+    }
+
+    // 实现倒计时将用户置为无效
+    public void delayToModUser(){
+
     }
 
 

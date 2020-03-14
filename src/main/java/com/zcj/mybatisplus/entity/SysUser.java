@@ -8,6 +8,7 @@ import com.zcj.mybatisplus.annotation.AttributeMean;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -36,4 +37,10 @@ public class SysUser implements Serializable {
     @TableField(exist = false)
     @AttributeMean(name = "角色列表")
     private List<SysRole> roleList;
+
+    @TableField(exist = false)
+    private Date createTime;
+
+    @TableField(exist = false)
+    private String time;
 }

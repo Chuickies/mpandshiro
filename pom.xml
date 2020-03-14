@@ -21,12 +21,17 @@
         <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
     </properties>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.1</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -41,11 +46,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -58,27 +70,8 @@
             <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-        <!--<dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>4.0.0</version>
-        </dependency>-->
-
-        <!-- excel2007+使用的包 -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.14</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>3.14</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.dom4j</groupId>
@@ -95,11 +88,6 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
@@ -113,22 +101,27 @@
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.liaochong</groupId>
+            <artifactId>myexcel</artifactId>
+            <version>2.8.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>poi-ooxml</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.j-im</groupId>
+            <artifactId>jim-server</artifactId>
+            <version>2.6.0.v20190114-RELEASE</version>
+        </dependency>-->
         <!-- <dependency>
              <groupId>org.springframework.boot</groupId>
              <artifactId>spring-boot-devtools</artifactId>
              <optional>true</optional>
          </dependency>-->
-        <dependency>
-            <groupId>com.github.liaochong</groupId>
-            <artifactId>myexcel</artifactId>
-            <version>2.8.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.j-im</groupId>
-            <artifactId>jim-server</artifactId>
-            <version>2.6.0.v20190114-RELEASE</version>
-        </dependency>
-
     </dependencies>
 
     <build>
