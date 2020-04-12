@@ -49,4 +49,8 @@ public class CompareTest {
         Date time = cal.getTime();
         log.info("输出::"+simpleDateFormat.format(time));
     }
+    @Test
+    public void test1(){
+
+    }
 }
